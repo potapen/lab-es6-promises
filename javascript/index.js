@@ -94,17 +94,23 @@ async function makeBroccoli() {
 }
 makeBroccoli()
 // Bonus 2 - Promise all
-const b0 = obtainInstruction('brusselsSprouts', 0)
-const b1 = obtainInstruction('brusselsSprouts', 1)
-const b2 = obtainInstruction('brusselsSprouts', 2)
-const b3 = obtainInstruction('brusselsSprouts', 3)
-const b4 = obtainInstruction('brusselsSprouts', 4)
-const b5 = obtainInstruction('brusselsSprouts', 5)
-const b6 = obtainInstruction('brusselsSprouts', 6)
-const b7 = obtainInstruction('brusselsSprouts', 7)
-const b8 = obtainInstruction('brusselsSprouts', 8)
+// const b0 = obtainInstruction('brusselsSprouts', 0)
+// const b1 = obtainInstruction('brusselsSprouts', 1)
+// const b2 = obtainInstruction('brusselsSprouts', 2)
+// const b3 = obtainInstruction('brusselsSprouts', 3)
+// const b4 = obtainInstruction('brusselsSprouts', 4)
+// const b5 = obtainInstruction('brusselsSprouts', 5)
+// const b6 = obtainInstruction('brusselsSprouts', 6)
+// const b7 = obtainInstruction('brusselsSprouts', 7)
+// const b8 = obtainInstruction('brusselsSprouts', 8)
 
-Promise.all( [b0, b1, b2, b3, b4, b5, b6, b7, b8] ).then((values)=>{
+const promises = []
+for (let i=0 ; i<brusselsSprouts.length ; i++){
+  const promise = obtainInstruction('brusselsSprouts', i)
+  promises.push(promise)
+}
+
+Promise.all( promises ).then((values)=>{
   values.forEach( value => document.querySelector("#brusselsSprouts").innerHTML += `<li>${value}</li>`)
   document.querySelector('#brusselsSproutsImg').hidden=false
 })
